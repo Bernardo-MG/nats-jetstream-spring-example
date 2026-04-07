@@ -7,8 +7,13 @@ services:
     ports:
       - "8080:8080"
       - "8000:8000"
+    depends_on:
+      nats-server:
+        condition: service_started
     environment:
       - nats.url=nats://nats-server:4222
+      - nats.username=nats
+      - nats.password=secret
 
   nats-server:
     image: nats:2.10

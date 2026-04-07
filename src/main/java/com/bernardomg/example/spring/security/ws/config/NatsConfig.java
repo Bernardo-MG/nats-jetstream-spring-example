@@ -45,6 +45,7 @@ public class NatsConfig {
 
         log.info("Connecting to NATS at {}", natsProperties.url());
         options = new Options.Builder().server(natsProperties.url())
+            .userInfo(natsProperties.username(), natsProperties.password())
             .build();
 
         return Nats.connect(options);
