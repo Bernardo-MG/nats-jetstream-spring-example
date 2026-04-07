@@ -7,3 +7,26 @@ services:
     ports:
       - "8080:8080"
       - "8000:8000"
+    environment:
+      - nats.url=nats://nats-server:4222
+
+  nats-server:
+    image: nats:2.10
+    container_name: nats-server
+    restart: unless-stopped
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+      - "6222:6222"
+    command:
+      - "-js"
+      - "-m"
+      - "8222"
+      - "--store_dir=/data/jetstream"
+      - "--user=nats"
+      - "--pass=secret"
+    volumes:
+      - nats_data:/data/jetstream
+
+volumes:
+  nats_data:
