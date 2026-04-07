@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "nats.url",
+    "type": "java.lang.String",
+    "description": "NATS endpoint"
+  },
+  {
+    "name": "nats.stream",
+    "type": "java.lang.String",
+    "description": "NATS stream for the events"
+  },
+  {
+    "name": "nats.username",
+    "type": "java.lang.String",
+    "description": "NATS endpoint username"
+  },
+  {
+    "name": "nats.password",
+    "type": "java.lang.String",
+    "description": "NATS endpoint password"
+  }
+]}

@@ -2,9 +2,15 @@
 
 Example for setting up NATS JetStream with Spring Boot.
 
+## Usage
+
+```
+docker-compose -f docker/docker-compose.yml --project-name nats-jetstream-example up
+```
+
 ## Features
 
-- 
+- Send and receive events through NATS
 
 ## Collaborate
 
