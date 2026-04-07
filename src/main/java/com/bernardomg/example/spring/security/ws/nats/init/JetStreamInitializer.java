@@ -1,5 +1,5 @@
 
-package com.bernardomg.example.spring.security.ws.jetstream.init;
+package com.bernardomg.example.spring.security.ws.nats.init;
 
 import java.util.Objects;
 

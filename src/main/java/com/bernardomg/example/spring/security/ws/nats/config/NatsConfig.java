@@ -1,5 +1,5 @@
 
-package com.bernardomg.example.spring.security.ws.config;
+package com.bernardomg.example.spring.security.ws.nats.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.bernardomg.example.spring.security.ws.jetstream.init.JetStreamInitializer;
+import com.bernardomg.example.spring.security.ws.nats.init.JetStreamInitializer;
 
 import io.nats.client.Connection;
 import io.nats.client.JetStream;
