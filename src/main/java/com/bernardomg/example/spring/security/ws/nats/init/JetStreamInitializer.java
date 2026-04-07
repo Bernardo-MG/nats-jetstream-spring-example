@@ -40,4 +40,5 @@ public final class JetStreamInitializer {
             jsm.addStream(streamConfig);
         }
     }
+
 }

@@ -29,6 +29,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,11 +62,11 @@ public class PersonController {
     }
 
     @PostMapping
-    public Person create(final Person person) {
+    public Person create(@RequestBody final Person person) {
 
         log.info("Person creation");
 
-        eventEmitter.emit("event.person", "message");
+        eventEmitter.emit("events.person", "message");
 
         return person;
     }
