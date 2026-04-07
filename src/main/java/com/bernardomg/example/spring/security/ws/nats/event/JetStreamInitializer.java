@@ -31,6 +31,8 @@ public final class JetStreamInitializer {
     public void setup() throws Exception {
         final StreamConfiguration streamConfig;
 
+        log.info("Initializing stream {}", natsProperties.stream());
+
         streamConfig = StreamConfiguration.builder()
             .name(natsProperties.stream())
             .subjects("events.*")
@@ -38,7 +40,7 @@ public final class JetStreamInitializer {
             .build();
 
         try {
-            jsm.getStreamInfo("EVENTS");
+            jsm.getStreamInfo(natsProperties.stream());
             log.info("Stream {} already exists", streamConfig.getName());
         } catch (final Exception ex) {
             log.info("Stream {} not existing, adding a new instance", streamConfig.getName());

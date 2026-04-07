@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import com.bernardomg.example.spring.security.ws.event.EventEmitter;
 import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventConsumer;
@@ -38,6 +39,7 @@ public class NatsConfig {
     }
 
     @Bean(initMethod = "subscribe")
+    @DependsOn("jetStreamInitializer")
     public JetStreamEventConsumer jetStreamEventConsumer(final Connection connection, final JetStream jetStream,
             final NatsProperties natsProperties) {
         return new JetStreamEventConsumer(connection, jetStream, natsProperties);

@@ -39,6 +39,8 @@ public final class JetStreamEventConsumer {
         final Dispatcher           dispatcher;
         final MessageHandler       handler;
 
+        log.info("Subscribing to stream {}", natsProperties.stream());
+
         options = PushSubscribeOptions.builder()
             .stream(natsProperties.stream())
             .durable("event-service")
@@ -58,7 +60,7 @@ public final class JetStreamEventConsumer {
             msg.ack();
         };
 
-        jetStream.subscribe("events.created", dispatcher, handler, false, options);
+        jetStream.subscribe("events.person", dispatcher, handler, false, options);
     }
 
 }
