@@ -1,0 +1,9 @@
+services:
+  ws:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    container_name: nats-jetstream-example
+    ports:
+      - "8080:8080"
+      - "8000:8000"
