@@ -424,6 +424,10 @@
          <artifactId>jakarta.validation-api</artifactId>
          <version>${jakarta.validation.version}</version>
       </dependency>
+      <dependency>
+         <groupId>org.hibernate.validator</groupId>
+         <artifactId>hibernate-validator</artifactId>
+      </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
       <!-- ============================================== -->

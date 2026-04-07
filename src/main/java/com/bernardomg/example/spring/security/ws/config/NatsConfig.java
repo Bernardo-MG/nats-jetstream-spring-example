@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.bernardomg.example.spring.security.ws.jetstream.init.JetStreamInitializer;
+
 import io.nats.client.Connection;
 import io.nats.client.JetStream;
 import io.nats.client.JetStreamManagement;
@@ -25,6 +27,11 @@ public class NatsConfig {
     @Bean
     public JetStream jetStream(final Connection connection) throws Exception {
         return connection.jetStream();
+    }
+
+    @Bean(initMethod = "setup")
+    public JetStreamInitializer jetStreamInitializer(final JetStreamManagement jsm) {
+        return new JetStreamInitializer(jsm);
     }
 
     @Bean
