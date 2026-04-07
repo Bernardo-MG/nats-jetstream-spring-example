@@ -125,6 +125,8 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
+      <jakarta.validation.version>3.1.1</jakarta.validation.version>
+      <nats.version>2.25.2</nats.version>
       <spring.boot.version>3.5.11</spring.boot.version>
       <spring.version>6.2.16</spring.version>
       <!-- ============================================== -->
@@ -303,6 +305,15 @@
          <artifactId>spring-boot-starter-actuator</artifactId>
       </dependency>
       <!-- ============================================== -->
+      <!-- =================== NATS ===================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- NATS -->
+         <groupId>io.nats</groupId>
+         <artifactId>jnats</artifactId>
+         <version>${nats.version}</version>
+      </dependency>
+      <!-- ============================================== -->
       <!-- ============== JPA DEPENDENCIES ============== -->
       <!-- ============================================== -->
       <dependency>
@@ -403,6 +414,19 @@
          <!-- Jackson annotations -->
          <groupId>com.fasterxml.jackson.core</groupId>
          <artifactId>jackson-annotations</artifactId>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ================ VALIDATION ================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Jakarta validation -->
+         <groupId>jakarta.validation</groupId>
+         <artifactId>jakarta.validation-api</artifactId>
+         <version>${jakarta.validation.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate.validator</groupId>
+         <artifactId>hibernate-validator</artifactId>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
