@@ -1,10 +1,12 @@
 
-package com.bernardomg.example.spring.security.ws.nats.init;
+package com.bernardomg.example.spring.security.ws.nats.event;
 
 import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.bernardomg.example.spring.security.ws.nats.config.NatsProperties;
 
 import io.nats.client.JetStreamManagement;
 import io.nats.client.api.StorageType;
@@ -19,15 +21,18 @@ public final class JetStreamInitializer {
 
     private final JetStreamManagement jsm;
 
-    public JetStreamInitializer(final JetStreamManagement jsm) {
+    private final NatsProperties      natsProperties;
+
+    public JetStreamInitializer(final JetStreamManagement jsm, final NatsProperties natsProperties) {
         this.jsm = Objects.requireNonNull(jsm);
+        this.natsProperties = Objects.requireNonNull(natsProperties);
     }
 
     public void setup() throws Exception {
         final StreamConfiguration streamConfig;
 
         streamConfig = StreamConfiguration.builder()
-            .name("EVENTS")
+            .name(natsProperties.stream())
             .subjects("events.*")
             .storageType(StorageType.File)
             .build();

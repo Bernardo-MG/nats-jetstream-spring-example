@@ -8,8 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.bernardomg.example.spring.security.ws.event.EventEmitter;
+import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventConsumer;
 import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventEmitter;
-import com.bernardomg.example.spring.security.ws.nats.init.JetStreamInitializer;
+import com.bernardomg.example.spring.security.ws.nats.event.JetStreamInitializer;
 
 import io.nats.client.Connection;
 import io.nats.client.JetStream;
@@ -36,9 +37,16 @@ public class NatsConfig {
         return connection.jetStream();
     }
 
+    @Bean(initMethod = "subscribe")
+    public JetStreamEventConsumer jetStreamEventConsumer(final Connection connection, final JetStream jetStream,
+            final NatsProperties natsProperties) {
+        return new JetStreamEventConsumer(connection, jetStream, natsProperties);
+    }
+
     @Bean(initMethod = "setup")
-    public JetStreamInitializer jetStreamInitializer(final JetStreamManagement jsm) {
-        return new JetStreamInitializer(jsm);
+    public JetStreamInitializer jetStreamInitializer(final JetStreamManagement jsm,
+            final NatsProperties natsProperties) {
+        return new JetStreamInitializer(jsm, natsProperties);
     }
 
     @Bean

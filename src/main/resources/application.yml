@@ -31,4 +31,4 @@ management:
       enabled: true
 
 nats:
-  url:
+  stream: EVENTS

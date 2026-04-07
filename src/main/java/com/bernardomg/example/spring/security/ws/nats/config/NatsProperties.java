@@ -37,4 +37,5 @@ import jakarta.validation.constraints.NotEmpty;
  */
 @Validated
 @ConfigurationProperties(prefix = "nats")
-public final record NatsProperties(@NotEmpty String url, @NotEmpty String username, @NotEmpty String password) {}
+public final record NatsProperties(@NotEmpty String stream, @NotEmpty String url, @NotEmpty String username,
+        @NotEmpty String password) {}
