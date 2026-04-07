@@ -66,7 +66,7 @@ public class PersonController {
 
         log.info("Person creation");
 
-        eventEmitter.emit("events.person", "message");
+        eventEmitter.emit("events.person", "Created a new person");
 
         return person;
     }

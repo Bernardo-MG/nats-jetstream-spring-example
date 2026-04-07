@@ -48,14 +48,14 @@ public final class JetStreamEventConsumer {
 
         dispatcher = connection.createDispatcher(msg -> {
             final String data = new String(msg.getData());
-            log.info("Received event {}", data);
+            log.info("Received event: {}", data);
 
             msg.ack();
         });
 
         handler = msg -> {
             final String data = new String(msg.getData());
-            log.info("Received event {}", data);
+            log.info("Received event: {}", data);
 
             msg.ack();
         };
