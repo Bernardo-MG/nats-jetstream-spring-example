@@ -10,7 +10,7 @@ docker-compose -f docker/docker-compose.yml --project-name nats-jetstream-exampl
 
 ## Features
 
-- 
+- Send and receive events through NATS
 
 ## Collaborate
 
