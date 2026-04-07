@@ -18,13 +18,13 @@
    <!-- ********************************************** -->
 
    <groupId>com.bernardomg.example</groupId>
-   <artifactId>oauth2-resource-server-example</artifactId>
+   <artifactId>nats-jetstream-example</artifactId>
    <version>1.4.0-SNAPSHOT</version>
    <packaging>war</packaging>
 
-   <name>OAuth 2 Resource Server Example</name>
-   <description>Example OAUTH 2 resource server with Spring.</description>
-   <url>https://github.com/bernardo-mg/oauth-resource-server-example</url>
+   <name>NATS JetStream Example</name>
+   <description>Example setting up NATS Jetstream with Spring.</description>
+   <url>https://github.com/bernardo-mg/nats-jetstream-spring-example</url>
    <inceptionYear>2021</inceptionYear>
 
    <licenses>
@@ -40,20 +40,20 @@
    <!-- ********************************************** -->
 
    <scm>
-      <connection>scm:git:https://github.com/bernardo-mg/oauth-resource-server-example.git</connection>
-      <developerConnection>scm:git:https://github.com/bernardo-mg/oauth-resource-server-example.git</developerConnection>
+      <connection>scm:git:https://github.com/bernardo-mg/nats-jetstream-spring-example.git</connection>
+      <developerConnection>scm:git:https://github.com/bernardo-mg/nats-jetstream-spring-example.git</developerConnection>
       <tag>head</tag>
-      <url>https://github.com/bernardo-mg/oauth-resource-server-example</url>
+      <url>https://github.com/bernardo-mg/nats-jetstream-spring-example</url>
    </scm>
 
    <issueManagement>
       <system>GitHub</system>
-      <url>https://github.com/bernardo-mg/oauth-resource-server-example/issues</url>
+      <url>https://github.com/bernardo-mg/nats-jetstream-spring-example/issues</url>
    </issueManagement>
 
    <ciManagement>
       <system>Github</system>
-      <url>https://github.com/bernardo-mg/oauth-resource-server-example/actions</url>
+      <url>https://github.com/bernardo-mg/nats-jetstream-spring-example/actions</url>
       <notifiers />
    </ciManagement>
 
@@ -117,7 +117,7 @@
       <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
-      <manifest.name>com/bernardomg/example/oauth</manifest.name>
+      <manifest.name>com/bernardomg/example/jetstream</manifest.name>
       <!-- ============================================== -->
       <!-- ================ JAVA VERSION ================ -->
       <!-- ============================================== -->
@@ -125,7 +125,6 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <keycloak.version>26.0.8</keycloak.version>
       <spring.boot.version>3.5.11</spring.boot.version>
       <spring.version>6.2.16</spring.version>
       <!-- ============================================== -->
@@ -241,29 +240,6 @@
          <artifactId>spring-data-commons</artifactId>
       </dependency>
       <!-- ============================================== -->
-      <!-- ============= SPRING SECURITY ================ -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Spring Security Core -->
-         <groupId>org.springframework.security</groupId>
-         <artifactId>spring-security-core</artifactId>
-      </dependency>
-      <dependency>
-         <!-- Spring Security Config -->
-         <groupId>org.springframework.security</groupId>
-         <artifactId>spring-security-config</artifactId>
-      </dependency>
-      <dependency>
-         <!-- Spring Security Web -->
-         <groupId>org.springframework.security</groupId>
-         <artifactId>spring-security-web</artifactId>
-      </dependency>
-      <dependency>
-         <!-- Spring Security OAuth 2 Resource Server -->
-         <groupId>org.springframework.security</groupId>
-         <artifactId>spring-security-oauth2-resource-server</artifactId>
-      </dependency>
-      <!-- ============================================== -->
       <!-- =============== SPRING BOOT ================== -->
       <!-- ============================================== -->
       <dependency>
@@ -322,22 +298,9 @@
          <artifactId>spring-boot-starter-log4j2</artifactId>
       </dependency>
       <dependency>
-         <!-- Spring Boot Starter: OAuth2 Resource Server -->
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-      </dependency>
-      <dependency>
          <!-- Spring Boot Starter: Actuator -->
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-actuator</artifactId>
-      </dependency>
-      <!-- ============================================== -->
-      <!-- ================= KEYCLOAK =================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <groupId>org.keycloak</groupId>
-         <artifactId>keycloak-admin-client</artifactId>
-         <version>${keycloak.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ============== JPA DEPENDENCIES ============== -->

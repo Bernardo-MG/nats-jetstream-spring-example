@@ -9,25 +9,6 @@
 spring:
   aop:
     proxy-target-class: false
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri:
-          jwk-set-uri:
-
-# Security client
-security:
-  oauth:
-    realm:
-    server:
-      url:
-    admin:
-      url:
-      clientId:
-      username:
-      password:
-      realm:
 
 # Actuators
 
