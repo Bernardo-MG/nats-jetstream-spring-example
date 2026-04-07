@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2022-2025 Bernardo Martínez Garrido
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.config;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
-
-import jakarta.validation.constraints.NotEmpty;
-
 /**
- * Async configuration properties.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * Controller classes for the example model.
  */
-@Validated
-@ConfigurationProperties(prefix = "nats")
-public final record NatsProperties(@NotEmpty String url, @NotEmpty String username, @NotEmpty String password) {}
+
+package com.bernardomg.example.spring.security.ws.person.adapter.outbound.rest.controller;

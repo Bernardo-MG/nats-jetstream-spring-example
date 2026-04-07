@@ -1,32 +1,22 @@
 {"properties": [
   {
-    "name": "security.oauth.realm",
+    "name": "nats.url",
     "type": "java.lang.String",
-    "description": "OAUTH realm"
+    "description": "NATS endpoint"
   },
   {
-    "name": "security.oauth.server.url",
+    "name": "nats.stream",
     "type": "java.lang.String",
-    "description": "OAUTH server URL"
+    "description": "NATS stream for the events"
   },
   {
-    "name": "security.oauth.admin.clientId",
+    "name": "nats.username",
     "type": "java.lang.String",
-    "description": "OAUTH administrator account client id"
+    "description": "NATS endpoint username"
   },
   {
-    "name": "security.oauth.admin.username",
+    "name": "nats.password",
     "type": "java.lang.String",
-    "description": "OAUTH administrator account username"
-  },
-  {
-    "name": "security.oauth.admin.password",
-    "type": "java.lang.String",
-    "description": "OAUTH administrator account password"
-  },
-  {
-    "name": "security.oauth.admin.realm",
-    "type": "java.lang.String",
-    "description": "OAUTH administrator account realm"
+    "description": "NATS endpoint password"
   }
 ]}

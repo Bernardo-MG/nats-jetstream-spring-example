@@ -39,6 +39,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Generate event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unauthorized request\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Person name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/person",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "Unauthorized requests. These are using no authentication, and are meanth to generate authentication errors.",
