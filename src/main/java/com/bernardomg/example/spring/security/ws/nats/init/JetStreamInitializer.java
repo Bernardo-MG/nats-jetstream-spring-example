@@ -10,7 +10,7 @@ import io.nats.client.JetStreamManagement;
 import io.nats.client.api.StorageType;
 import io.nats.client.api.StreamConfiguration;
 
-public class JetStreamInitializer {
+public final class JetStreamInitializer {
 
     /**
      * Logger for the class.

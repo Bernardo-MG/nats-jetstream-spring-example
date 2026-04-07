@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.bernardomg.example.spring.security.ws.event.EventEmitter;
+import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventEmitter;
 import com.bernardomg.example.spring.security.ws.nats.init.JetStreamInitializer;
 
 import io.nats.client.Connection;
@@ -23,6 +25,11 @@ public class NatsConfig {
      * Class logger.
      */
     private static final Logger log = LoggerFactory.getLogger(NatsConfig.class);
+
+    @Bean
+    public EventEmitter eventEmitter(final JetStream jetStream) throws Exception {
+        return new JetStreamEventEmitter(jetStream);
+    }
 
     @Bean
     public JetStream jetStream(final Connection connection) throws Exception {
