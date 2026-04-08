@@ -62,11 +62,11 @@ public class PersonController {
     }
 
     @PostMapping
-    public Person create(@RequestBody final Person person) {
+    public Person create(@RequestBody final Person person) throws Exception {
 
         log.info("Person creation");
 
-        eventEmitter.emit("events.person", "Created a new person");
+        eventEmitter.emit("events.person.create", "Created a new person");
 
         return person;
     }

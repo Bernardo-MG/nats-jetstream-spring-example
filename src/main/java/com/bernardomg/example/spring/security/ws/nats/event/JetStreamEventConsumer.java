@@ -29,6 +29,8 @@ public final class JetStreamEventConsumer {
 
     public JetStreamEventConsumer(final Connection connection, final JetStream jetStream,
             final NatsProperties natsProperties) {
+        super();
+
         this.connection = Objects.requireNonNull(connection);
         this.jetStream = Objects.requireNonNull(jetStream);
         this.natsProperties = Objects.requireNonNull(natsProperties);
@@ -43,12 +45,12 @@ public final class JetStreamEventConsumer {
 
         options = PushSubscribeOptions.builder()
             .stream(natsProperties.stream())
-            .durable("event-service")
+            .durable("event-consumer")
             .build();
 
         dispatcher = connection.createDispatcher(msg -> {
             final String data = new String(msg.getData());
-            log.info("Received event: {}", data);
+            log.info("Received event on dispatcher: {}", data);
 
             msg.ack();
         });
@@ -60,7 +62,7 @@ public final class JetStreamEventConsumer {
             msg.ack();
         };
 
-        jetStream.subscribe("events.person", dispatcher, handler, false, options);
+        jetStream.subscribe("events.>", dispatcher, handler, false, options);
     }
 
 }
