@@ -7,8 +7,6 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bernardomg.example.spring.security.ws.nats.config.NatsProperties;
-
 import io.nats.client.JetStreamApiException;
 import io.nats.client.JetStreamManagement;
 import io.nats.client.api.StorageType;
@@ -23,23 +21,23 @@ public final class JetStreamInitializer {
 
     private final JetStreamManagement jsm;
 
-    private final NatsProperties      natsProperties;
+    private final String              stream;
 
-    public JetStreamInitializer(final JetStreamManagement jsm, final NatsProperties natsProperties) {
+    public JetStreamInitializer(final String stream, final JetStreamManagement jsm) {
         super();
 
+        this.stream = Objects.requireNonNull(stream);
         this.jsm = Objects.requireNonNull(jsm);
-        this.natsProperties = Objects.requireNonNull(natsProperties);
     }
 
     public void setup() throws Exception {
-        log.info("Initializing stream {}", natsProperties.stream());
+        log.info("Initializing stream {}", stream);
 
         try {
-            jsm.getStreamInfo(natsProperties.stream());
-            log.info("Stream {} already exists", natsProperties.stream());
+            jsm.getStreamInfo(stream);
+            log.info("Stream {} already exists", stream);
         } catch (final Exception ex) {
-            log.info("Stream {} not existing, adding a new instance", natsProperties.stream());
+            log.info("Stream {} not existing, adding a new instance", stream);
             loadStream();
         }
     }
@@ -48,7 +46,7 @@ public final class JetStreamInitializer {
         final StreamConfiguration streamConfig;
 
         streamConfig = StreamConfiguration.builder()
-            .name(natsProperties.stream())
+            .name(stream)
             .subjects("events.>")
             .storageType(StorageType.File)
             .build();
