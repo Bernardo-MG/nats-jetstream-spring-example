@@ -30,6 +30,8 @@ services:
       - "--store_dir=/data/jetstream"
       - "--user=nats"
       - "--pass=secret"
+      - "-DV"   # Debug + Verbose
+      - "-T"    # Trace protocol messages
     volumes:
       - nats_data:/data/jetstream
 
