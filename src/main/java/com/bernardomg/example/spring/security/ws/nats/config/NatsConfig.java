@@ -42,8 +42,8 @@ public class NatsConfig {
     @Bean(initMethod = "subscribe")
     @DependsOn("jetStreamInitializer")
     public JetStreamEventConsumer jetStreamEventConsumer(final Connection connection, final JetStream jetStream,
-            final NatsProperties natsProperties) {
-        return new JetStreamEventConsumer(connection, jetStream, natsProperties);
+            final NatsProperties natsProperties, final ObjectMapper objectMapper) {
+        return new JetStreamEventConsumer(connection, jetStream, natsProperties, objectMapper);
     }
 
     @Bean(initMethod = "setup")
