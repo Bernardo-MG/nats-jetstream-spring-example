@@ -6,7 +6,9 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bernardomg.example.spring.security.ws.event.Event;
 import com.bernardomg.example.spring.security.ws.event.EventEmitter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.nats.client.JetStream;
 import io.nats.client.api.PublishAck;
@@ -20,19 +22,25 @@ public final class JetStreamEventEmitter implements EventEmitter {
 
     private final JetStream     jetStream;
 
-    public JetStreamEventEmitter(final JetStream jetStream) {
+    private final ObjectMapper  objectMapper;
+
+    public JetStreamEventEmitter(final JetStream jetStream, final ObjectMapper objectMapper) {
         super();
 
         this.jetStream = Objects.requireNonNull(jetStream);
+        this.objectMapper = Objects.requireNonNull(objectMapper);
     }
 
     @Override
-    public final void emit(final String subject, final String message) throws Exception {
+    public final void emit(final String subject, final Event<?> event) throws Exception {
         final PublishAck ack;
+        final byte[]     message;
 
-        log.info("Sending event to subject {} with message {}", subject, message);
+        log.info("Sending to subject {} the event {}", subject, event);
 
-        ack = jetStream.publish(subject, message.getBytes());
+        message = objectMapper.writeValueAsBytes(event);
+
+        ack = jetStream.publish(subject, message);
 
         log.info("Sent event. Received ack {}", ack);
     }

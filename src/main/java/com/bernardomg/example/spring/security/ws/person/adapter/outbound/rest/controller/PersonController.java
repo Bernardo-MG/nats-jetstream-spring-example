@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bernardomg.example.spring.security.ws.event.EventEmitter;
+import com.bernardomg.example.spring.security.ws.person.domain.event.PersonEvent;
 import com.bernardomg.example.spring.security.ws.person.domain.model.Person;
 
 /**
@@ -66,7 +67,7 @@ public class PersonController {
 
         log.info("Person creation");
 
-        eventEmitter.emit("events.person.create", "Created a new person");
+        eventEmitter.emit("events.person.create", new PersonEvent(person));
 
         return person;
     }
