@@ -12,7 +12,6 @@ import com.bernardomg.example.spring.security.ws.event.EventEmitter;
 import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventConsumer;
 import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventEmitter;
 import com.bernardomg.example.spring.security.ws.nats.event.JetStreamInitializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.nats.client.Connection;
 import io.nats.client.JetStream;
@@ -30,8 +29,8 @@ public class NatsConfig {
     private static final Logger log = LoggerFactory.getLogger(NatsConfig.class);
 
     @Bean
-    public EventEmitter eventEmitter(final JetStream jetStream, final ObjectMapper objectMapper) throws Exception {
-        return new JetStreamEventEmitter(jetStream, objectMapper);
+    public EventEmitter eventEmitter(final JetStream jetStream) throws Exception {
+        return new JetStreamEventEmitter(jetStream);
     }
 
     @Bean
@@ -42,8 +41,8 @@ public class NatsConfig {
     @Bean(initMethod = "subscribe")
     @DependsOn("jetStreamInitializer")
     public JetStreamEventConsumer jetStreamEventConsumer(final Connection connection, final JetStream jetStream,
-            final NatsProperties natsProperties, final ObjectMapper objectMapper) {
-        return new JetStreamEventConsumer(connection, jetStream, natsProperties, objectMapper);
+            final NatsProperties natsProperties) {
+        return new JetStreamEventConsumer(connection, jetStream, natsProperties);
     }
 
     @Bean(initMethod = "setup")

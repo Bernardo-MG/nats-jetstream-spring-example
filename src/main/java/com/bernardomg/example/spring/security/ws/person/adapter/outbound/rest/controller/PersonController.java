@@ -24,7 +24,10 @@
 
 package com.bernardomg.example.spring.security.ws.person.adapter.outbound.rest.controller;
 
+import java.net.URI;
+import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +37,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bernardomg.example.spring.security.ws.event.EventEmitter;
-import com.bernardomg.example.spring.security.ws.person.domain.event.PersonEvent;
 import com.bernardomg.example.spring.security.ws.person.domain.model.Person;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.cloudevents.CloudEvent;
+import io.cloudevents.core.builder.CloudEventBuilder;
 
 /**
  * Rest controller for the example model.
@@ -56,20 +63,54 @@ public class PersonController {
      */
     private final EventEmitter  eventEmitter;
 
-    public PersonController(final EventEmitter eventEmitter) {
+    private final ObjectMapper  objectMapper;
+
+    public PersonController(final ObjectMapper objectMapper, final EventEmitter eventEmitter) {
         super();
 
+        this.objectMapper = Objects.requireNonNull(objectMapper);
         this.eventEmitter = Objects.requireNonNull(eventEmitter);
     }
 
     @PostMapping
     public Person create(@RequestBody final Person person) throws Exception {
+        final CloudEvent cloudEvent;
 
         log.info("Person creation");
 
-        eventEmitter.emit("events.person.create", new PersonEvent(person));
+        cloudEvent = createEvent(person);
+        eventEmitter.emit("events.person.create", cloudEvent);
 
         return person;
+    }
+
+    private final CloudEvent createEvent(final Person person) {
+        final UUID           id;
+        final OffsetDateTime time;
+        final URI            uri;
+        final String         eventType;
+        final byte[]         content;
+
+        try {
+            content = objectMapper.writeValueAsBytes(person);
+        } catch (final JsonProcessingException e) {
+            // TODO handle the exception
+            throw new RuntimeException(e);
+        }
+
+        id = UUID.randomUUID();
+        time = OffsetDateTime.now();
+        eventType = "com.bernardomg.example.spring.security.ws.person.domain.event.PersonEvent";
+        // TODO: use valid source
+        uri = URI.create("urn:example:source");
+        return CloudEventBuilder.v1()
+            .withId(id.toString())
+            .withType(eventType)
+            .withTime(time)
+            .withDataContentType("application/json")
+            .withData(content)
+            .withSource(uri)
+            .build();
     }
 
 }

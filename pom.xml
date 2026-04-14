@@ -125,6 +125,7 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
+      <cloudevents.version>4.0.1</cloudevents.version>
       <jakarta.validation.version>3.1.1</jakarta.validation.version>
       <nats.version>2.25.2</nats.version>
       <spring.boot.version>3.5.11</spring.boot.version>
@@ -284,6 +285,19 @@
          <groupId>io.nats</groupId>
          <artifactId>jnats</artifactId>
          <version>${nats.version}</version>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- =============== CLOUD EVENTS ================= -->
+      <!-- ============================================== -->
+      <dependency>
+         <groupId>io.cloudevents</groupId>
+         <artifactId>cloudevents-core</artifactId>
+         <version>${cloudevents.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>io.cloudevents</groupId>
+         <artifactId>cloudevents-json-jackson</artifactId>
+         <version>${cloudevents.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ================== LOGGING =================== -->
