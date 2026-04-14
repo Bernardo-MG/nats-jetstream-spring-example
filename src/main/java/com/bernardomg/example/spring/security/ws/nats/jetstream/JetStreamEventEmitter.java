@@ -1,5 +1,5 @@
 
-package com.bernardomg.example.spring.security.ws.nats.event;
+package com.bernardomg.example.spring.security.ws.nats.jetstream;
 
 import java.io.IOException;
 import java.util.Objects;

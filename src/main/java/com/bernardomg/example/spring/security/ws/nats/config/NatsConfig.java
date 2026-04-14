@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import com.bernardomg.example.spring.security.ws.event.EventEmitter;
-import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventConsumer;
-import com.bernardomg.example.spring.security.ws.nats.event.JetStreamEventEmitter;
-import com.bernardomg.example.spring.security.ws.nats.event.JetStreamInitializer;
+import com.bernardomg.example.spring.security.ws.nats.jetstream.JetStreamEventConsumer;
+import com.bernardomg.example.spring.security.ws.nats.jetstream.JetStreamEventEmitter;
+import com.bernardomg.example.spring.security.ws.nats.jetstream.JetStreamInitializer;
 
 import io.nats.client.Connection;
 import io.nats.client.JetStream;
