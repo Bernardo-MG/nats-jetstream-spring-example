@@ -42,7 +42,7 @@ public class NatsConfig {
     @DependsOn("jetStreamInitializer")
     public JetStreamEventConsumer jetStreamEventConsumer(final Connection connection, final JetStream jetStream,
             final NatsProperties natsProperties) {
-        return new JetStreamEventConsumer(connection, jetStream, natsProperties);
+        return new JetStreamEventConsumer(natsProperties.stream(), connection, jetStream);
     }
 
     @Bean(initMethod = "setup")

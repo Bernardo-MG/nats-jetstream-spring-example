@@ -6,8 +6,6 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bernardomg.example.spring.security.ws.nats.config.NatsProperties;
-
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.format.EventFormat;
 import io.cloudevents.core.provider.EventFormatProvider;
@@ -23,24 +21,23 @@ public final class JetStreamEventConsumer {
     /**
      * Logger for the class.
      */
-    private static final Logger  log    = LoggerFactory.getLogger(JetStreamEventConsumer.class);
+    private static final Logger log    = LoggerFactory.getLogger(JetStreamEventConsumer.class);
 
-    private final Connection     connection;
+    private final Connection    connection;
 
-    private final EventFormat    format = EventFormatProvider.getInstance()
+    private final EventFormat   format = EventFormatProvider.getInstance()
         .resolveFormat(JsonFormat.CONTENT_TYPE);
 
-    private final JetStream      jetStream;
+    private final JetStream     jetStream;
 
-    private final NatsProperties natsProperties;
+    private final String        stream;
 
-    public JetStreamEventConsumer(final Connection connection, final JetStream jetStream,
-            final NatsProperties natsProperties) {
+    public JetStreamEventConsumer(final String stream, final Connection connection, final JetStream jetStream) {
         super();
 
+        this.stream = Objects.requireNonNull(stream);
         this.connection = Objects.requireNonNull(connection);
         this.jetStream = Objects.requireNonNull(jetStream);
-        this.natsProperties = Objects.requireNonNull(natsProperties);
     }
 
     public final void subscribe() throws Exception {
@@ -48,10 +45,10 @@ public final class JetStreamEventConsumer {
         final Dispatcher           dispatcher;
         final MessageHandler       handler;
 
-        log.info("Subscribing to stream {}", natsProperties.stream());
+        log.info("Subscribing to stream {}", stream);
 
         options = PushSubscribeOptions.builder()
-            .stream(natsProperties.stream())
+            .stream(stream)
             .durable("event-consumer")
             .build();
 
