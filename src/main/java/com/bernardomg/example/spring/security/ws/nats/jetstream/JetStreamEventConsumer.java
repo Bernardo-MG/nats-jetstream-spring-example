@@ -1,6 +1,7 @@
 
 package com.bernardomg.example.spring.security.ws.nats.jetstream;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import io.cloudevents.jackson.JsonFormat;
 import io.nats.client.Connection;
 import io.nats.client.Dispatcher;
 import io.nats.client.JetStream;
+import io.nats.client.JetStreamApiException;
 import io.nats.client.MessageHandler;
 import io.nats.client.PushSubscribeOptions;
 
@@ -40,7 +42,7 @@ public final class JetStreamEventConsumer {
         this.jetStream = Objects.requireNonNull(jetStream);
     }
 
-    public final void subscribe() throws Exception {
+    public final void subscribe() {
         final PushSubscribeOptions options;
         final Dispatcher           dispatcher;
         final MessageHandler       handler;
@@ -70,7 +72,11 @@ public final class JetStreamEventConsumer {
             msg.ack();
         };
 
-        jetStream.subscribe("events.>", dispatcher, handler, false, options);
+        try {
+            jetStream.subscribe("events.>", dispatcher, handler, false, options);
+        } catch (IOException | JetStreamApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
