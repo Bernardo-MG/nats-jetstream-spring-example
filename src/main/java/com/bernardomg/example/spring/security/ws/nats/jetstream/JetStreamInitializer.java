@@ -59,7 +59,7 @@ public final class JetStreamInitializer {
         try {
             jsm.addStream(streamConfig);
         } catch (final Exception e) {
-            // TODO handle the exception
+            // TODO: handle the exception
             throw new RuntimeException(e);
         }
     }
