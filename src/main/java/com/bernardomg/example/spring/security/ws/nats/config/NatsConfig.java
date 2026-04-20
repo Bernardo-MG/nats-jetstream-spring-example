@@ -48,7 +48,7 @@ public class NatsConfig {
     @Bean(initMethod = "setup")
     public JetStreamInitializer jetStreamInitializer(final JetStreamManagement jsm,
             final NatsProperties natsProperties) {
-        return new JetStreamInitializer(natsProperties.stream(), jsm);
+        return new JetStreamInitializer(natsProperties.stream(), "events.>", jsm);
     }
 
     @Bean

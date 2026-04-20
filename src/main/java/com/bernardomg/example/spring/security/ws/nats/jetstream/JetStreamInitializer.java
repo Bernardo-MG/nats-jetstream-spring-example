@@ -21,10 +21,13 @@ public final class JetStreamInitializer {
 
     private final String              stream;
 
-    public JetStreamInitializer(final String stream, final JetStreamManagement jsm) {
+    private final String              subjects;
+
+    public JetStreamInitializer(final String stream, final String subjects, final JetStreamManagement jsm) {
         super();
 
         this.stream = Objects.requireNonNull(stream);
+        this.subjects = Objects.requireNonNull(subjects);
         this.jsm = Objects.requireNonNull(jsm);
     }
 
@@ -52,7 +55,7 @@ public final class JetStreamInitializer {
 
         streamConfig = StreamConfiguration.builder()
             .name(stream)
-            .subjects("events.>")
+            .subjects(subjects)
             .storageType(StorageType.File)
             .build();
 
