@@ -34,10 +34,14 @@ public final class JetStreamEventConsumer {
 
     private final String        stream;
 
-    public JetStreamEventConsumer(final String stream, final Connection connection, final JetStream jetStream) {
+    private final String        subject;
+
+    public JetStreamEventConsumer(final String stream, final String subject, final Connection connection,
+            final JetStream jetStream) {
         super();
 
         this.stream = Objects.requireNonNull(stream);
+        this.subject = Objects.requireNonNull(subject);
         this.connection = Objects.requireNonNull(connection);
         this.jetStream = Objects.requireNonNull(jetStream);
     }
@@ -47,7 +51,7 @@ public final class JetStreamEventConsumer {
         final Dispatcher           dispatcher;
         final MessageHandler       handler;
 
-        log.info("Subscribing to stream {}", stream);
+        log.info("Subscribing to stream {} and subject {}", stream, subject);
 
         options = PushSubscribeOptions.builder()
             .stream(stream)
@@ -73,7 +77,7 @@ public final class JetStreamEventConsumer {
         };
 
         try {
-            jetStream.subscribe("events.>", dispatcher, handler, false, options);
+            jetStream.subscribe(subject, dispatcher, handler, false, options);
         } catch (IOException | JetStreamApiException e) {
             throw new RuntimeException(e);
         }
