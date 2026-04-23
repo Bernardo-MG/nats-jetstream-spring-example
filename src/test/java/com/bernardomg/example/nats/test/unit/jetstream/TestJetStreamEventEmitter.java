@@ -31,9 +31,9 @@ import io.nats.client.api.PublishAck;
 @ExtendWith(MockitoExtension.class)
 public class TestJetStreamEventEmitter {
 
-    private static final String     JSON       = "{\"name\":\"John\"}";
-
     private static final String     EVENT_JSON = "{\"specversion\":\"1.0\",\"id\":\"123\",\"source\":\"test-source\",\"type\":\"type\",\"datacontenttype\":\"application/json\",\"data\":{\"name\":\"John\"}}";
+
+    private static final String     JSON       = "{\"name\":\"John\"}";
 
     private static final String     SUBJECT    = "events.test";
 
@@ -54,8 +54,8 @@ public class TestJetStreamEventEmitter {
     @Test
     @DisplayName("When an event is received it is serialized and emitted")
     void testEmit() throws Exception {
-        final byte[]      payload;
-        final PublishAck  ack;
+        final byte[]     payload;
+        final PublishAck ack;
 
         // Given
         payload = EVENT_JSON.getBytes();
