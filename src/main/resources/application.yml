@@ -32,3 +32,4 @@ management:
 
 nats:
   stream: EVENTS
+  subject: events.>
