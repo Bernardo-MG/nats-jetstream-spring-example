@@ -12,7 +12,14 @@
             First release.
          </action>
       </release>
-      <release version="1.1.0" date="2026-04-07"
+      <release version="1.0.1" date="2026-05-29"
+         description="Clean up">
+         <action dev="bmg" type="update">
+            Using cloud events.
+         </action>
+         <action dev="bmg" type="update">
+            Cleaned up code.
+         </action>
       </release>
    </body>
 </document>
